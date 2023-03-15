@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "https://cavinkare.com/img/2021/12/Flipkart-Logo-removebg-preview.png">
+    <title>Contact Me Page</title>
+    <script src="https://kit.fontawesome.com/13240490a1.js" crossorigin="anonymous"></script>
+    <style>
+        /* ---------------contact----------------- */
+        #contact {
+            margin-top: 150px;
+        }
+
+        html {
+            /*Helps To scroll slowly to move to another topic to see page properly*/
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: #fff;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .container {
+            padding: 10px 10%;
+        }
+
+        .contact-left {
+            flex-basis: 35%;
+        }
+
+        .contact-right {
+            flex-basis: 60%;
+        }
+
+        .contact-left p {
+            margin-top: 30px;
+        }
+
+        .contact-left p i {
+            color: #ff004f;
+            margin-right: 15px;
+            font-size: 25px;
+        }
+
+        .social-icons {
+            margin-top: 30px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            font-size: 30px;
+            margin-right: 15px;
+            color: #ababab;
+            display: inline-block;
+            transition: transform 0.5s;
+
+        }
+
+        .social-icons a:hover {
+            color: #ff004f;
+            transform: translateY(-5px);
+            /*This Will move the icon little bit up will moving the cursor*/
+        }
+
+        .btn.btn2 {
+            display: inline-block;
+            background: #ff004f;
+            padding: 14px 60px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .contact-right form {
+            width: 100%;
+
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            border: 0;
+            outline: none;
+            background: #262626;
+            padding: 15px;
+            margin: 15px 0;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 6px;
+        }
+
+        /* form .btn2 {
+            padding: 14px 60px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+        } */
+
+
+        /* ---------Footer------ */
+        .copyright {
+            width: 100%;
+            text-align: center;
+            padding: 25px 0;
+            background: #262626;
+            font-weight: 300;
+            margin-top: 100px;
+            /* margin-bottom: 0px; */
+        }
+
+        .copyright:hover {
+            background: #ff004f;
+            font-weight: 400;
+        }
+
+        #msg {
+            color: #61b752;
+            margin-top: -40px;
+            display: block;
+        }
+
+        .btn.btn2:hover {
+            background-color: #ff004f;
+            border: 2px solid #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-------------------------Contact------------------------>
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title" style="font-size: 70px;">Contact Me</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i>contact@domain.com</p>
+                    <p><i class="fa-sharp fa-solid fa-square-phone"></i>91+ 7446644656</p>
+                    <div class="social-icons">
+                        <a href="" target="_blank"><i class="fa-brands fa-hackerrank"></i></i></a>
+                        <a href="" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        <a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                    <a href="img/my-cv.pdf" class="btn btn2" target="_blank">Download CV</a>
+                </div>
+
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                        <input type="email" name="Email" placeholder="Your Email" required>
+                        <textarea name="Message" rows="6" placeholder="Type Your Message Here"></textarea>
+                        <input type="datetime-local" name="Time" placeholder="Upload Your file" required>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Deepak. Made With <i class="fa-solid fa-heart"></i> By Deepak Gangwani</p>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxBaYSYF-FLUd_wr8e9O_pV0w5ZqEZcP3fafVuYSU48PoUIrEcOu-o11OBb_6duodq34g/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    msg.innerHTML = "Message sent successfully"
+                    setTimeout(function () {
+                        msg.innerHTML = ""
+                    }, 5000)
+                    form.reset()
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+
+</html>
